@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<body style="display:flex; flex-direction:column; margin: 0 150px;">
+    create yo recipe with its description
+
+    <form action="" method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        {{recipeform}}
+        <div>
+            <input type="submit" name='create recipe' value='Create recipe' >
+            <input type="submit" name='delete recipe' value='Delete recipe' >
+        </div>
+        </form>
+    
+    
+    add an ingredient to teh ingredients lest with its amount
+    
+    <form action="" method='POST'>
+        {% csrf_token %}
+        {{ingredientform}}
+        <div>
+            <input type="submit" name="submit ingredient" value='Add ingredient' >
+            <input type="submit" name="delete ingredient" value='Delete ingredient' >
+        </div>
+    </form>
+    
+    {% for recipe in recipes %}
+    <div class="div" style="margin: 40px 0;">
+        {{recipe.name}}
+        <p>
+            {{recipe.description}}
+        </p>
+        
+        <img src="{{recipe.picture.url}}" style="width:400px; display:block;" alt="dedd">
+    
+        {% for ingredient in recipe.ingredients %}
+            <p>
+                {{ingredient.name}}:
+                {{ingredient.amount}}
+                {{ingredient.unit }}
+            </p>
+        {% endfor %}
+    </div>
+      
+    {% endfor %}
+</body>
